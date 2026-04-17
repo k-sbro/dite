@@ -10,8 +10,8 @@ type Step = 1 | 2 | 3;
 
 const MEAL_TIMES: MealTime[] = ['breakfast', 'lunch', 'dinner', 'snack'];
 
-function getTodayStr() {
-  return new Date().toISOString().split('T')[0];
+function getTodayStr(): string {
+  return new Date().toISOString().split('T')[0] ?? '';
 }
 
 interface AddMealModalProps {
