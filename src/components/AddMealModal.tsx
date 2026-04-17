@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { analyzeMeal, saveMeal } from '@/app/actions';
 import { convertToWebP, blobToBase64 } from '@/utils/imageUtils';
 import { FoodItem, MealTime, MealTimeLabels } from '@/types/meal';
+import { backdropVariants, sheetVariants, sheetTransition } from '@/lib/motionPresets';
 
 type Step = 1 | 2 | 3;
 
@@ -116,17 +117,19 @@ export function AddMealModal({ onClose }: AddMealModalProps) {
     <AnimatePresence>
       <motion.div
         className="fixed inset-0 bg-black/60 z-50 flex items-end sm:items-center justify-center"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
+        variants={backdropVariants}
+        initial="hidden"
+        animate="visible"
+        exit="exit"
         onClick={onClose}
       >
         <motion.div
           className="bg-white w-full sm:max-w-md rounded-t-2xl sm:rounded-2xl p-6 max-h-[90vh] overflow-y-auto"
-          initial={{ y: '100%' }}
-          animate={{ y: 0 }}
-          exit={{ y: '100%' }}
-          transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+          variants={sheetVariants}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+          transition={sheetTransition}
           onClick={(e) => e.stopPropagation()}
         >
           {/* Header */}
